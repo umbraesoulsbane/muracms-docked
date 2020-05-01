@@ -31,7 +31,6 @@ services:
             - ./www/sites:/var/www/sites
             - ./www/themes:/var/www/themes
 # DEBUG CORE     - ./www/core:/var/www/core
-# DEBUG CONFIG   
             - ./srv/muracms/conf:/home/conf
             - ./srv/muracms/logs:/opt/muracms/web/logs
         ports:
