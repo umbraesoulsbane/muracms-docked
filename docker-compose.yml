@@ -24,7 +24,7 @@ services:
             MURA_SITEIDINURLS: "false"
             MURA_INDEXFILEINURLS: "false"
             MURA_USESSL: "false"
-            MURA_PROJECT_SECRETS: projectsecrets
+            MURA_PROJECT_SECRETS: murasecrets
         volumes:
             - ./www/modules:/var/www/modules
             - ./www/plugins:/var/www/plugins
