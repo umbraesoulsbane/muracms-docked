@@ -38,7 +38,8 @@ services:
         secrets:
             - projectsecrets
 
-    svc_muradb:
+	svc_muradb:
+		container_name: muracms_postgresql
         image: postgres:alpine
         restart: always
         environment:
