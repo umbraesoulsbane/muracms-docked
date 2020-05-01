@@ -10,7 +10,7 @@ This is a skeleton project for developing with MuraCMS (https://www.getmura.com/
 - Centralized place for passwords.
 
 **/srv**
-- Custom configs for MuraCMS and Lucee Logs. Sets password for Lucee Admin to csxcsx for developer access if needed.
+- Custom configs for MuraCMS and Lucee Logs. 
 - Contains Dockerfile for copying Lucee/Tomcat configuration files.
 
 **/www**
