@@ -1,0 +1,63 @@
+version: '3.7'
+
+services:
+
+    muracms:
+        container_name: muracms_docked
+        build:
+            context: .
+            dockerfile: ./srv/muracms/Dockerfile
+        depends_on:
+            - svc_muradb
+        environment:
+            MURA_ADMIN_USERNAME: admin
+            MURA_ADMIN_PASSWORD: FROM_ENV
+            MURA_ADMINEMAIL: youremail@domain.com
+            MURA_APPRELOADKEY: appreload
+            MURA_DATASOURCE: dsn_muracms
+            MURA_DATABASE: muradb
+            MURA_DBTYPE: postgresql
+            MURA_DBUSERNAME: muradb
+            MURA_DBPASSWORD: FROM_ENV 
+            MURA_DBHOST: svc_muradb
+            MURA_DBPORT: 5432
+            MURA_SITEIDINURLS: "false"
+            MURA_INDEXFILEINURLS: "false"
+            MURA_USESSL: "false"
+            MURA_PROJECT_SECRETS: projectsecrets
+        volumes:
+            - ./www/modules:/var/www/modules
+            - ./www/plugins:/var/www/plugins
+            - ./www/sites:/var/www/sites
+            - ./www/themes:/var/www/themes
+# DEBUG CORE     - ./www/core:/var/www/core
+# DEBUG CONFIG   
+            - ./srv/muracms/conf:/home/conf
+            - ./srv/muracms/logs:/opt/muracms/web/logs
+        ports:
+            - "80:8888"
+        secrets:
+            - projectsecrets
+
+    svc_muradb:
+        image: postgres:alpine
+        restart: always
+        environment:
+            POSTGRES_DB: muradb
+            POSTGRES_USER: muradb
+            POSTGRES_PASSWORD_FILE: /run/secrets/postgressecrets
+        volumes:
+            - vol_muracms_postgres:/var/lib/postgresql/data
+        ports:
+            - "5004:5432"
+        secrets:
+            - postgressecrets
+
+volumes:
+    vol_muracms_postgres:
+
+secrets:
+    projectsecrets:
+        file: ./secrets/mura_secrets.sample.json
+    postgressecrets:
+        file: ./secrets/postgres_secrets.sample.txt
