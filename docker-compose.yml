@@ -36,7 +36,7 @@ services:
         ports:
             - "80:8888"
         secrets:
-            - projectsecrets
+            - murasecrets
 
     svc_muradb:
         container_name: muracms_postgresql
@@ -57,7 +57,7 @@ volumes:
     vol_muracms_postgres:
 
 secrets:
-    projectsecrets:
+    murasecrets:
         file: ./secrets/mura_secrets.sample.json
     postgressecrets:
         file: ./secrets/postgres_secrets.sample.txt
